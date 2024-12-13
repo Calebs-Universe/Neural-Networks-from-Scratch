@@ -31,10 +31,15 @@ class Layer_Dense:
         self.biases = np.zeros((1, n_neurons))
 
     def forward(self, inputs):
-        pass
+        self.output = np.dot(inputs, self.weights) + self.biases
 
 
 X, Y = spiral_data(samples=100, classes=3)
-print(X, Y, sep='\n')
 
-# plt.scatter([])
+print(X)
+
+dense1 = Layer_Dense(2, 3)
+
+dense1.forward(X)
+
+print(dense1.output[:5])
