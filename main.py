@@ -34,12 +34,34 @@ class Layer_Dense:
         self.output = np.dot(inputs, self.weights) + self.biases
 
 
+
+## Code for ReLU activation
+# NB: f(x) = 0 if x<0 else x
+class Activation_ReLU:
+
+    def forward(self, inputs):
+        self.output = np.maximum(0, inputs)
+
+
+## Softmax activation
+class Activation_Softmax:
+
+    def forward(self, inputs):
+        exp_values = np.exp(inputs - np.max(inputs, axis=1, keepdims=True)) 
+        probabilities = exp_values / np.sum(exp_values, axis=1, keepdims=True)
+
+        self.output = probabilities
+
+
 X, Y = spiral_data(samples=100, classes=3)
 
 print(X)
 
 dense1 = Layer_Dense(2, 3)
+activation1 = Activation_ReLU()
 
 dense1.forward(X)
+activation1.forward(dense1.output)
 
 print(dense1.output[:5])
+print(activation1.output)
