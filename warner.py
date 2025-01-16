@@ -1,9 +1,10 @@
-def say_hello(*args, **kwargs):
-    # print(txt)
-    # fn()
-    print(f'{args} {kwargs}')
-    print('COol')
+import matplotlib.pyplot as plt
+import nnfs
+from nnfs.datasets import vertical_data
 
-@say_hello('Hello')
-def cool():
-    print("how ma boy")
+nnfs.init()
+
+X, Y = vertical_data(samples=100, classes=3)
+
+plt.scatter(X[:, 0], X[:, 1], c=Y, s=40, cmap='brg')
+plt.show()
