@@ -78,6 +78,7 @@ class Loss_CategoricalCrossentropy(Loss):
         return negative_log_likelihood
 
 
+# Create dataset
 X, Y = vertical_data(samples=100, classes=3)
 
 dense1 = Layer_Dense(2, 3)
@@ -92,13 +93,13 @@ best_dense2_weights = dense2.weights.copy()
 best_dense1_biases = dense1.biases.copy()
 best_dense2_biases = dense2.biases.copy()
 
-lowest_loss = 9999
+lowest_loss = 99999999 # some initial high value
 
-for iteration in range(10000):
-    dense1.weights = 0.05 * np.random.randn(2, 3)
-    dense1.biases = 0.05 * np.random.randn(1, 3)
-    dense2.weights = 0.05 * np.random.randn(3, 3)
-    dense2.biases = 0.05 * np.random.randn(1, 3)
+for iteration in range(100000):
+    dense1.weights += 0.05 * np.random.randn(2, 3)
+    dense1.biases += 0.05 * np.random.randn(1, 3)
+    dense2.weights += 0.05 * np.random.randn(3, 3)
+    dense2.biases += 0.05 * np.random.randn(1, 3)
 
     dense1.forward(X)
     activation1.forward(dense1.output)
@@ -118,8 +119,8 @@ for iteration in range(10000):
     
 
 
-print(dense1.output[:5])
-print(activation1.output)
+# print(dense1.output[:5])
+# print(activation1.output)
 
 
 # print(activation2.output[:20])
@@ -128,3 +129,5 @@ loss = loss_function.calculate(activation2.output, Y)
 
 # print("loss:", loss)
 # print("accuracy: ", accuracy_function.calculate(activation2.output, Y))
+
+####### ENDED ON PAGE 132 #######
